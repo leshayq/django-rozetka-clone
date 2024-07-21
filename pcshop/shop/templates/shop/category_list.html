@@ -1,0 +1,31 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class='category-container'>
+    <div class='category-list-title'>
+        <p> Пошук за запитом.. <span>{{ category.name }}</span></p>
+    </div>
+
+    <div>
+        <ul class='product-items'>
+        {% for product in products %}
+        <li>
+        <div class='solo-item'>
+            <img src="{% static 'shop/images/image 8.png'%}" width='200' height='120'>
+            <a href='{% url "shop:product_detail" product.slug %}'>{{ product.title|capfirst }}</a>
+            <p>{{ product.description|truncatechars:26}}</p>
+            <span>
+                {{ product.price }}$
+            </span>
+        </div>
+        </li>
+        {% empty %}
+        <div class='empty-search'>
+        <p>За вашим запитом не знайдено товарів.</p>
+        </div>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock content %}

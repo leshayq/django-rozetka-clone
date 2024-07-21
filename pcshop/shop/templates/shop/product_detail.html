@@ -1,0 +1,53 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% comment %} <div class='returnback'>
+    <a href="{% url 'shop:products' %}">←</a>
+</div> {% endcomment %}
+
+<div clas='product-info'>
+    <div class='w-2'>
+        <div class='product-path'>
+            {% comment %} <a href="{% url 'shop:products' %}">{{ product.category }} / {{ product.brand }} / {{ product.title }}</a> {% endcomment %}
+            <a href="{% url 'shop:category_list' product.category.slug %}">{{ product.category}}</a> <a>/</a> <a href=''>{{ product.brand}}</a> <a>/</a> <a>{{ product.title }}</a>
+        </div>
+        <img src="{% static 'shop/images/75_1500.jpg'%}" width='500' height='500' style='margin-top: 30px; margin-left: 30px;'>
+    </div>
+
+    <div class='w-2'>
+        <br>
+        <div class='product-title'>
+            <h1>{{ product.title }}</h1>
+        </div>
+
+        <div class='product-description'>
+            <p>{{ product.description }}</p>
+        </div>
+
+        <div class='product-buy-info'>
+            <p>Продавець: ROFLETKA 
+            {% if product.available %}
+            <p class='product-available'> Є в наявності
+            {% else %}
+            <p class='product-non-available'> Немає у наявності
+            {% endif %}
+            </p>
+            
+            <button class="product-buy">Купити</button>
+            <span>
+                {{ product.price }}$
+            </span>
+        </div>
+
+        <div class='product-buy-info'>
+            <p><b>Оплата.</b> Оплата під час отримання товару, Оплата карткою у відділенні, Google Pay, Картою онлайн, -5% знижки в разі оплати від 500 грн карткою Visa, Безготівковими для юридичних осіб, Оплатити онлайн соціальною картою "Пакунок малюка", Безготівковий для фізичних осіб, Visa, Apple Pay, Mastercard</p>
+            <p><b>Гарантія.</b> 24 місяці Обмін/повернення товару впродовж 14 днів </p>
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock content %}
