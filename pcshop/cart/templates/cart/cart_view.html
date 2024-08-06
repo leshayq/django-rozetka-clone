@@ -52,9 +52,16 @@
 
     </div>
 
+
+    {% if cart.get_total_price != 0 %}
     <div class='category-list-title' id='total'>
         <p class=''> Загальна сума: {{ cart.get_total_price }}$</p>
     </div>
+    {% else %}
+    <div class='category-list-title' id='total'>
+        <p class=''> Кошик порожнiй</p>
+    </div>
+    {% endif %}
 </div>
 
 <script>
