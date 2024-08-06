@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link type="text/css" href="{% static 'shop/css/styles.css'%}" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +40,7 @@
                         <img src="{% static 'shop/images/Group 1.png'%}">
                     </a>
 
-                    <a href='cart' class='no-glow'>
+                    <a href='{% url "cart:cart_view" %}' class='no-glow'>
                         <img src="{% static 'shop/images/icons8-cart-64 1.png'%}">
                     </a>
                 </div>
@@ -48,13 +49,6 @@
     </div>
 <div class='wrapper'>
     <div class='container'>
-            <div class='category-lister'>
-                <ul>
-                    {% for cat in categories %}
-                    <li><a href="{% url 'shop:category_list' cat.slug %}">{{ cat.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
     {% block content %}
     
     {% endblock content %}

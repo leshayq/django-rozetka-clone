@@ -1,0 +1,8 @@
+
+<div class='category-lister'>
+    <ul>
+        {% for cat in categories %}
+        <li><a href="{% url 'shop:category_list' cat.slug %}">{{ cat.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>

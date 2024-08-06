@@ -3,6 +3,7 @@
 
 {% block content %}
 
+{% include 'shop/categories_bar.html'%}
 {% comment %} <div class='returnback'>
     <a href="{% url 'shop:products' %}">←</a>
 </div> {% endcomment %}
@@ -34,8 +35,14 @@
             <p class='product-non-available'> Немає у наявності
             {% endif %}
             </p>
+
+            <div class='cart-solo-item-inside-quantity'>
+                <p>Кількість</p>
+                <input type="number" id="goods_quantity" name="goods_quantity" min="1" max="100" value='1'/>
+            </div>
             
-            <button class="product-buy">Купити</button>
+            <button class="product-buy" id='add-button' value='{{ product.id }}'>Купити</button>
+            
             <span>
                 {{ product.price }}$
             </span>
@@ -49,5 +56,28 @@
 
     </div>
 </div>
+
+<script>
+    $(document).on('click', '#add-button', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cart:add_to_cart" %}',
+            data: {
+                product_id: $('#add-button').val(),
+                product_qty: $('#goods_quantity').val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post',
+            },
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+</script>
 
 {% endblock content %}

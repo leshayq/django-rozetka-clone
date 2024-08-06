@@ -1,0 +1,110 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load mathfilters %}
+
+{% block content %}
+<div class='cart-main'>
+    <div class='cart-header'>
+        <p>Кошик</p>
+    </div>
+
+    <div class='cart-items'>
+        {% for item in cart %}
+        {% with product=item.product %}
+
+        <div class='cart-solo-item'>
+            <div>
+                <img src="{% static 'shop/images/image 8.png'%}" width='200' height='120'>
+            </div>
+
+            <div class='cart-solo-item-inside'>
+                <div class='cart-solo-item-inside-title'>
+                    <p>{{ product.title }}</p>
+                    <span>{{ product.price|mul:item.qty }}$</span>
+                </div>
+                
+                <div class='cart-solo-item-inside-general'>
+                    <div class='cart-solo-item-inside-quantity'>
+                        <p>Кількість</p>
+                        <input type="number" id="goods_quantity{{ product.id }}" name="goods_quantity" min="1" max="100" value='{{ item.qty }}'/>
+                    </div>
+
+                    <div class='cart-solo-item-inside-buttons'>
+                        <button 
+                        type='button'
+                        class='cart-update-button'
+                        data-index='{{ product.id }}'>
+                        Update
+                        </button>
+                        <button 
+                        type='button'
+                        class='cart-delete-button'
+                        data-index='{{ product.id }}'>
+                        Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endwith %}
+        {% endfor %}
+        
+
+    </div>
+
+    <div class='category-list-title' id='total'>
+        <p class=''> Загальна сума: {{ cart.get_total_price }}$</p>
+    </div>
+</div>
+
+<script>
+    $(document).on('click', '.cart-delete-button', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cart:delete_from_cart" %}',
+            data: {
+                product_id: $(this).data('index'),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post',
+            },
+            success: function(response) {
+                document.getElementById('total').textContent = response.total;
+                location.reload()
+            },
+            error: function(error) {
+                console.log('error')
+            }
+
+        })
+    })
+
+
+
+    $(document).on('click', '.cart-update-button', function(e) {
+        e.preventDefault();
+
+        var product_id = $(this).data('index')
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cart:update_cart" %}',
+            data: {
+                product_id: $(this).data('index'),
+                product_qty: $('#goods_quantity'+product_id).val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post',
+            },
+            success: function(response) {
+                document.getElementById('total').textContent = response.total;
+                location.reload()
+            },
+            error: function(error) {
+                console.log('error')
+            }
+
+        })
+    })
+</script>
+{% endblock content %}
