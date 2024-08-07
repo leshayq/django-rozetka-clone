@@ -379,3 +379,57 @@ body {
     margin-right: 10px;
     cursor: pointer;
 }
+
+.form-register {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    font-size: 18px;
+}
+
+.form-register h3 {
+    padding: 10px;
+    font-weight: 600;
+    font-size: 30px;
+    color: #00A046;
+    margin-bottom: -5px;
+}
+
+#div_id_username, #div_id_email, #div_id_password1, #div_id_password2 {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#id_username, #id_email, #id_password1, #id_password2 {
+    width: 500px;
+    border-radius: 3px;
+    border: 1px solid #5F5858;
+    line-height: 200%;
+    font-size: 20px;
+}
+
+.form-label {
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.form-text {
+    color: #5F5858;
+    font-size: 16px; 
+}
+
+.register-button {
+    background-color: #00A046;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    transition-duration: 0.1s;
+    cursor: pointer;
+}
