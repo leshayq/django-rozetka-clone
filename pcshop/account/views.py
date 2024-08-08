@@ -20,9 +20,9 @@ def register_user(request):
             user = User.objects.create_user(user_username, user_email, user_password)
 
             user.is_active = False
-
-            login(request, user)
-            # return redirect('home')
+            
+            send_email(user)
+            return redirect('/account/email_verification')
     else:
         form = UserCreateForm()
     return render(request, 'account/registration/register.html', {'form': form})
