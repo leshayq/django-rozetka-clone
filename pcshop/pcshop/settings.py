@@ -117,7 +117,7 @@ def email_verified_callback(user):
 
 # Global Package Settings
 EMAIL_FROM_ADDRESS = os.getenv('EMAIL_FROM_ADDRESS')  # mandatory
-EMAIL_PAGE_DOMAIN = 'https://127.0.0.1:8000/'  # mandatory (unless you use a custom link)
+EMAIL_PAGE_DOMAIN = 'http://127.0.0.1:8000/'  # mandatory (unless you use a custom link)
 EMAIL_MULTI_USER = False  # optional (defaults to False)
 
 # Email Verification Settings (mandatory for email sending)

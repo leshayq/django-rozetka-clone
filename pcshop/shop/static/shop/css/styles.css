@@ -433,3 +433,24 @@ body {
     transition-duration: 0.1s;
     cursor: pointer;
 }
+
+.verification-window {
+    margin: 0 auto;
+    border: 1px;
+    padding: 20px;
+    background-color: #659bff;
+    margin-top: 20px;
+    height: 175px;
+    width: 25%;
+    text-align: center;
+}
+
+.success-verification-window {
+    margin: 0 auto;
+    border: 1px;
+    padding: 20px;
+    background-color: #7bff6c;
+    margin-top: 20px;
+    height: 150px;
+    width: 100%;
+}

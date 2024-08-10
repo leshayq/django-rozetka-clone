@@ -20,6 +20,16 @@ class UserCreateForm(UserCreationForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email').lower()
-        if User.object.filter(email=email).exists() and len(email) > 254:
+        if User.objects.filter(email=email).exists() and len(email) > 254:
             raise forms.ValidationError("Така e-mail адреса вже зареєстрована або завелика")
         return email
+    
+class UserLoginForm(AuthenticationForm):
+
+    def __init__(self, *args, **kwargs):
+        super(UserLoginForm, self).__init__(*args, **kwargs)
+
+        self.fields['username'].widget = TextInput(attrs={'placeholder': 'Ваш логін'})
+        self.fields['password'].widget = PasswordInput(attrs={'placeholder': 'Ваш пароль'})
+
+        

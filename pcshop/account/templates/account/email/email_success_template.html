@@ -1,5 +1,9 @@
-{% include 'shop/base.html' %}
+{% extends 'shop/base.html' %}
 {% load static %}
 
-{% block title %}
-{% endblock title %}
+{% block content %}
+<div class='success-verification-window'>
+    <p><b>Ваша електронна пошта успішно підтверджена</b></p>
+    <p>Клікніть <a href='{% url "shop:products" %}'>сюди<a/> щоб повернутися на головну сторінку.</p>
+</div>
+{% endblock content %}
