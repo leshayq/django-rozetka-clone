@@ -9,6 +9,9 @@ from .forms import UserCreateForm, UserLoginForm
 User = get_user_model()
 
 def register_user(request):
+    if request.user.is_authenticated:
+        return redirect('shop:products')
+    
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
         if form.is_valid():
@@ -27,21 +30,41 @@ def register_user(request):
         form = UserCreateForm()
     return render(request, 'account/registration/register.html', {'form': form})
 
+def email_verification(request):
+    return render(request, 'account/email/email_verification.html')
+
+
 def login_user(request):
     form = UserLoginForm()
+
+    if request.user.is_authenticated:
+        return redirect('shop:products')
+    
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
-        if form.is_valid():
-            username = request.POST.get('username')
-            password = request.POST.get('password')
 
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.success(request, f'Вітаємо {username}!')
-                return redirect('account:dashboard')
-            else:
-                messages.error("Ім'я користувача або пароль невірні. Спробуйте ще раз.")
-    else:
-        form = UserLoginForm()
-    return render(request, 'account/login.html', {'form': form})
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            print(user.username, user.password)
+            messages.success(request, f'Вітаємо {username}!')
+            return redirect('account:dashboard')
+        else:
+            messages.error("Ім'я користувача або пароль невірні. Спробуйте ще раз.")
+            return redirect('account:login')
+    context = {
+        'form': form,
+    }
+    return render(request, 'account/login/login.html', context)
+
+@login_required
+def logout_user(request):
+    logout(request)
+    return redirect('shop:products')
+
+@login_required
+def dashboard(request):
+    return render(request, 'account/dashboard/dashboard.html')

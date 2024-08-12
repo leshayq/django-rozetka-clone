@@ -29,7 +29,7 @@ class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
 
-        self.fields['username'].widget = TextInput(attrs={'placeholder': 'Ваш логін'})
-        self.fields['password'].widget = PasswordInput(attrs={'placeholder': 'Ваш пароль'})
+        self.fields['username'].widget = TextInput(attrs={'placeholder': 'Ваш логін', 'id': 'id_username'})
+        self.fields['password'].widget = PasswordInput(attrs={'placeholder': 'Ваш пароль', 'id': 'id_password1'})
 
         
