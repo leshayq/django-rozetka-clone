@@ -1,0 +1,12 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+{% block content %}
+<div class="verification-window">
+    <form method="post">
+        {% csrf_token %}
+            <p><b>Ви впевнені, що хочете видалити свій акаунт?</b></p>
+            <button type="submit" class="register-button">Видалити</button>
+    </form>
+</div>
+{% endblock content %}

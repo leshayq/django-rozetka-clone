@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django_email_verification import send_email
 
-from .forms import UserCreateForm, UserLoginForm
+from .forms import UserCreateForm, UserLoginForm, UserUpdateForm
 
 User = get_user_model()
 
@@ -60,11 +60,36 @@ def login_user(request):
     }
     return render(request, 'account/login/login.html', context)
 
-@login_required
+@login_required(login_url='account:login')
 def logout_user(request):
     logout(request)
     return redirect('shop:products')
 
-@login_required
+@login_required(login_url='account:login')
 def dashboard(request):
     return render(request, 'account/dashboard/dashboard.html')
+
+
+@login_required(login_url='account:login')
+def profile_user(request):
+
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('account:dashboard')
+    else:
+        form = UserUpdateForm(instance=request.user)
+    context = {
+        'form': form
+    }
+    return render(request, 'account/dashboard/profile_edit.html', context)
+
+@login_required(login_url='account:login')
+def delete_user(request):
+    user = User.objects.get(id=request.user.id)
+    if request.method == 'POST':
+        user.delete()
+        return redirect('shop:products')
+    return render(request, 'account/dashboard/account_delete.html')

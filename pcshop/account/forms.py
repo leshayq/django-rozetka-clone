@@ -32,4 +32,15 @@ class UserLoginForm(AuthenticationForm):
         self.fields['username'].widget = TextInput(attrs={'placeholder': 'Ваш логін', 'id': 'id_username'})
         self.fields['password'].widget = PasswordInput(attrs={'placeholder': 'Ваш пароль', 'id': 'id_password1'})
 
-        
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField(required=True)
+    class Meta:
+        model = User
+        fields = ['email']
+
+    def __init__(self, *args, **kwargs):
+        super(UserUpdateForm, self).__init__(*args, **kwargs)
+
+        self.fields['email'].label = 'Ваша e-mail адреса'
+        self.fields['email'].required = True

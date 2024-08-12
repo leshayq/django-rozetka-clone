@@ -460,3 +460,29 @@ body {
     flex-direction: column;
     padding: 10px;
 }
+
+.account-update-button {
+    padding: 10px;
+    background-color: #0073a0;
+    color: #FFF;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.account-delete-button {
+    padding: 10px;
+    background-color: #FF6363;
+    color: #FFF;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    margin-right: 10px;
+    cursor: pointer;
+} 
+
+.profile-overview {
+    display: flex;
+    flex-direction: column;
+}
