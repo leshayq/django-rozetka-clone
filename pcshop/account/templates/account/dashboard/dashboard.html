@@ -3,8 +3,9 @@
 {% load static %}
 {% block content %}
 <div class='profile-overview'>
-    <h1>Hi, {{ user.username }}</h1>
+    <h1>Вітаємо, {{ user.username }}!</h1>
     <div class='cart-solo-item-inside-buttons'>
+        <a class='account-logout-button' href='{% url "account:logout"%}'>Вийти з акаунту</a>
         <a class='account-update-button' href='{% url "account:account_update"%}'>Редагувати профіль</a>
         <a class='account-delete-button' href='{% url "account:account_delete"%}'>Видалити акаунт</a>
     </div>

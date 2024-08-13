@@ -486,3 +486,14 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.account-logout-button {
+    padding: 10px;
+    background-color: #f563ff;
+    color: #FFF;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    margin-right: 10px;
+    cursor: pointer;
+}
