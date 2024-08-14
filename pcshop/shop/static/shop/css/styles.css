@@ -401,7 +401,7 @@ body {
     padding: 10px;
 }
 
-#id_username, #id_email, #id_password1, #id_password2, #id_password {
+#id_username, #id_email, #id_password1, #id_password2, #id_password, #id_full_name, #id_street_address, #id_city, #id_zip_code {
     width: 500px;
     border-radius: 3px;
     border: 1px solid #5F5858;
@@ -496,4 +496,18 @@ body {
     border-radius: 8px;
     margin-right: 10px;
     cursor: pointer;
+}
+
+.marginer {
+    margin-top: 35px;
+}
+
+.checkout-button {
+    padding: 10px;
+    background-color: #0073a0;
+    color: #FFF;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    margin-right: 10px;
 }

@@ -1,0 +1,25 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+{% block content %}
+<br>
+<div class="form-register">
+    <h3>Доставка</h3>
+    <form method='POST'>
+        {% csrf_token %}
+        {% for field in form %}
+        <div class='login-column'>
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}
+                <small class='form-text'>{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <input type="submit" value="ОК" class="register-button">
+    </form>
+</div>
+{% endblock content %} 
