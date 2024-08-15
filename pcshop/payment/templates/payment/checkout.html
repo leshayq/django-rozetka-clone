@@ -2,5 +2,62 @@
 
 {% load static %}
 {% block content %}
+<div>
+    <form method='POST' action='{% url "payment:complete-order" %}'>
+        {% csrf_token %}
+        <div class='login-column'>
+            <label for="id_full_name">Full name:</label>
+            <input type="text" name="full_name" value='{{ shipping_address.full_name }}' autocomplete="off" placeholder='ФІО' required id="id_full_name">
+        </div>
+        
+        <div class='login-column'>
+            <label for="id_email">Email:</label>
+            <input type="email" name="email" value='{{ shipping_address.email }}' autocomplete="off" placeholder='Електрона адреса' required id="id_email">
+        </div>
+        
+        <div class='login-column'>
+            <label for="id_street_address">Street address:</label>
+            <input type="text" name="street_address" value='{{ shipping_address.street_address }}' autocomplete="off" placeholder='Адреса' id="id_street_address">
+        </div>
+        
+        <div class='login-column'>
+            <label for="id_city">City:</label>
+            <input type="text" name="city" value='{{ shipping_address.city }}' autocomplete="off" placeholder='Місто' id="id_city"> 
+        </div>
+        
+        <div class='login-column'>
+            <label for="id_zip_code">Zip code:</label>
+            <input type="text" name="zip_code" value='{{ shipping_address.zip_code }}' autocomplete="off" placeholder='Zip-code' id="id_zip_code">
+        </div>
+
+        <input type="submit" value="Завершити замовлення" class="register-button">
+    </form>
+</div>
+
+<script>
+    $(document).on('submit', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "payment:complete-order" %}',
+            data: {
+                name: $('#id_full_name').val(),
+                email: $('#id_email').val(),
+                address: $('#id_street_address').val(),
+                city: $('#id_city').val(),
+                zip_code: $('#id_zip_code').val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'payment',
+            },
+            success: function(response) {
+                window.location.href = '{% url "payment:payment-success"%}'
+            },
+            error: function(xhr, errormsg, err) {
+                window.location.href = '{% url "payment:payment-fail"%}'
+            }
+        });
+    });
+</script>
 
 {% endblock content %}
