@@ -23,5 +23,13 @@
             {% endfor %}
             <input type="submit" value="Вхід" class="register-button">
         </form>
+
+        <div class='form-text'>
+            <a href='{% url "account:register" %}'>Не маєте акаунту?</a>
+        </div>
+
+        <div class='form-text'>
+            <a href='{% url "account:password_reset" %}'>Забули пароль?</a>
+        </div>
     </div>
 {% endblock content %}
