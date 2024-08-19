@@ -29,35 +29,8 @@
             <label for="id_zip_code">Zip code:</label>
             <input type="text" name="zip_code" value='{{ shipping_address.zip_code }}' autocomplete="off" placeholder='Zip-code' id="id_zip_code">
         </div>
-
-        <input type="submit" value="Завершити замовлення" class="register-button">
+        <input type="submit" id="stripe-payment" value="Stripe Payment" class="register-button">
     </form>
 </div>
-
-<script>
-    $(document).on('submit', function(e) {
-        e.preventDefault();
-
-        $.ajax({
-            type: 'POST',
-            url: '{% url "payment:complete-order" %}',
-            data: {
-                name: $('#id_full_name').val(),
-                email: $('#id_email').val(),
-                address: $('#id_street_address').val(),
-                city: $('#id_city').val(),
-                zip_code: $('#id_zip_code').val(),
-                csrfmiddlewaretoken: '{{ csrf_token }}',
-                action: 'payment',
-            },
-            success: function(response) {
-                window.location.href = '{% url "payment:payment-success"%}'
-            },
-            error: function(xhr, errormsg, err) {
-                window.location.href = '{% url "payment:payment-fail"%}'
-            }
-        });
-    });
-</script>
 
 {% endblock content %}
