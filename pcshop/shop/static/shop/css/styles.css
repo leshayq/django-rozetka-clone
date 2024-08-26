@@ -511,3 +511,22 @@ body {
     border-radius: 8px;
     margin-right: 10px;
 }
+
+.welcome-window {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    padding: 35px;
+}
+
+.welcome-window a {
+    height: 100px;
+    width: 100px;
+    padding: 20px;
+    background-color: #00A046;
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+
+}

@@ -1,0 +1,10 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+{% block content %}
+<div class="welcome-window">
+    <a href="{% url 'shop:products' %}">Магазин</a>
+    <a href="{% url 'shop:products' %}">Новини</a>
+    <a href="{% url 'shop:products' %}">Ще</a>
+</div>
+{% endblock content %}
