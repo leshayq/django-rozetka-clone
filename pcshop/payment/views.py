@@ -85,8 +85,9 @@ def complete_order(request):
                     'quantity': item['qty'],
                 })
 
-                session = stripe.checkout.Session.create(**session_data)
-                return redirect(session.url, code=303)
+            session_data['client_reference_id'] = order.id
+            session = stripe.checkout.Session.create(**session_data)
+            return redirect(session.url, code=303)
         else:
             order = Order.objects.create(shipping_address=shipping_address, amount=total_price)
 
