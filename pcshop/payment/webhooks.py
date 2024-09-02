@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Order
+from .tasks import send_order_confirmation
 import stripe
 
 @csrf_exempt
@@ -29,6 +30,8 @@ def stripe_webhook(request):
             
             except Order.DoesNotExist:
                 return HttpResponse(status=400)
+            
+            send_order_confirmation(order_id)
             order = Order.objects.get(id=order_id)
             order.paid = True
             order.save()
